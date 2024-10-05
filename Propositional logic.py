@@ -1,12 +1,12 @@
-# library for generating truth table combinations
+# library for generating truth table
 import itertools
 
 # print the truth table for a logical expression
 def print_truth_table(variables, expression):
-    # Generating all combinations of True and False for given variables
+    # Generating all combinations of True & False for given variables
     combinations = list(itertools.product([False, True], repeat=len(variables)))
 
-    # Print the header of the truth table
+    # Print header for truth table
     print(f"{' | '.join(variables)} | Expression ({expression})")
     print('-' * (len(variables) * 6 + 15))
     
@@ -18,7 +18,7 @@ def print_truth_table(variables, expression):
         # Evaluate the expression in the current environment (combination of truth values)
         result = eval(expression, {}, env)
         
-        # Print the result row in the truth table
+        # Print result for row in the truth table
         truth_values = " | ".join([f'{str(value):^5}' for value in combination])
         print(f"{truth_values} | {str(result):^15}")
 
