@@ -1,0 +1,57 @@
+# Predicate Logic Example - Quantifiers, Proving, Disproving
+
+# functions to represent predicates
+def is_even(n):
+    """Check if a number is even."""
+    return n % 2 == 0
+
+def is_prime(n):
+    """Check if a number is prime."""
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def is_square(n):
+    """Check if a number is a perfect square."""
+    return int(n**0.5) ** 2 == n
+
+# Universal Quantifier: ∀x ∈ A, P(x)
+def forall(iterable, predicate):
+    """Check if predicate holds true for all elements in an iterable."""
+    return all(predicate(x) for x in iterable)
+
+# Existential Quantifier: ∃x ∈ A, P(x)
+def exists(iterable, predicate):
+    """Check if predicate holds true for at least one element in an iterable."""
+    return any(predicate(x) for x in iterable)
+
+# Proving Statements: Example (∀x ∈ A, x² ≥ x)
+def prove_universal_statement():
+    """Prove ∀x ∈ {1, 2, 3, 4, 5}, x² ≥ x."""
+    A = [1, 2, 3, 4, 5]
+    return forall(A, lambda x: x**2 >= x)
+
+# Disproving Statements: Example (∃x ∈ A, x² = -1) - No real solution
+def disprove_existential_statement():
+    """Disprove ∃x ∈ {1, 2, 3, 4, 5}, x² = -1."""
+    A = [1, 2, 3, 4, 5]
+    return not exists(A, lambda x: x**2 == -1)
+
+# Nested Quantifiers: ∀x ∃y ∈ {1, 2, 3}, xy > 4
+def prove_nested_quantifier_statement():
+    """Prove ∀x ∈ {2, 3}, ∃y ∈ {1, 2, 3}, xy > 4."""
+    X = [2, 3]
+    Y = [1, 2, 3]
+    for x in X:
+        # Check if  exists at least one y in Y 
+        if not exists(Y, lambda y: x * y > 4):
+            return False  # If not, the statement is false
+    return True
+
+
+print("Proving ∀x ∈ {1, 2, 3, 4, 5}, x² ≥ x:", prove_universal_statement())
+print("Disproving ∃x ∈ {1, 2, 3, 4, 5}, x² = -1:", disprove_existential_statement())
+print("Proving ∀x ∈ {2, 3}, ∃y ∈ {1, 2, 3}, xy > 4:", prove_nested_quantifier_statement())
